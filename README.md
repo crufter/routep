@@ -12,12 +12,12 @@ import(
 )
 
 func main() {
-	m, ok := routep.Comp("/categories/{category}", "/categories/animals")
-	fmt.Println(m, ok)
+	m, err := routep.Comp("/categories/{category}", "/categories/animals")
+	fmt.Println(m, err)
 }
 ```
 
-The above example will output:
+The above example will output (not counting the lack of '"'):
 ```
-map["category": "animals"] true
+map["category": "animals"] ""
 ```
