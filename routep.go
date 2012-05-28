@@ -1,7 +1,5 @@
-// A routep package egy nagyon egyszerű (ezáltal gyors) módja annak, hogy egy url-t összehasunlítsunk egy "url template"-tel
-// és kiextraháljuk belőle a változókat.
-//
-// Működése: 
+// The RouteP package is an overly simplistic way of comparing an URL with an URL template and
+// extract variables out of it.
 package routep
 
 import(
@@ -13,7 +11,7 @@ const(
 	value_longer	= "value is longer than maximum allowed by template"
 )
 
-// Rövidebb és hosszabb urlt is megenged, mint a template ha a fix részek megegyeznek.
+// It does allow shorter or longer URL than the template if the fix parts match.
 //
 //	"/person/{name}/hobby/{hobby}", "/person/john/hobby/cycling" 	=> map[name: john, hobby: cycling]
 //
@@ -38,7 +36,7 @@ func Comp(tpl, str string) (map[string]string, string) {
 	return ret, ""
 }
 
-// Hosszabb urlt nem enged meg, mint a template.
+// Does not allow longer URL than the template.
 //
 //	"/person/{name}/hobby/{hobby}", "/person/john/hobby/cycling" 	=> map[name: john, hobby: cycling]
 //
