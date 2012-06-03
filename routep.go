@@ -2,13 +2,13 @@
 // extract variables out of it.
 package routep
 
-import(
+import (
 	"strings"
 )
 
-const(
-	not_matching	= "value not matching with template"
-	value_longer	= "value is longer than maximum allowed by template"
+const (
+	not_matching = "value not matching with template"
+	value_longer = "value is longer than maximum allowed by template"
 )
 
 // It does allow shorter or longer URL than the template if the fix parts match.
@@ -27,9 +27,9 @@ func Comp(tpl, str string) (map[string]string, string) {
 		//	v = strings.Split(v, "?")[0]
 		//}
 		if v != "" && string(v[0]) == "{" && string(v[len(v)-1]) == "}" && i < len(s) {
-			key := v[1:len(v)-1]
+			key := v[1 : len(v)-1]
 			ret[key] = s[i]
-		} else if i < len(s) && s[i] != v {	// ha van
+		} else if i < len(s) && s[i] != v { // ha van
 			return ret, not_matching
 		}
 	}
