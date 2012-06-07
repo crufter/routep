@@ -4,6 +4,7 @@ package routep
 
 import (
 	"strings"
+	"fmt"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 //	"/person/{name}/hobby/{hobby}", "/person/john"					=> map[name:john]
 //
 //	"/person/{name}",				"/person/john/hobby/cycling"	=> map[name:john]
-func Comp(tpl, str string) (map[string]string, string) {
+func Comp(tpl, str string) (map[string]string, error) {
 	t := strings.Split(tpl, "/")
 	s := strings.Split(str, "/")
 	ret := make(map[string]string)
@@ -30,10 +31,10 @@ func Comp(tpl, str string) (map[string]string, string) {
 			key := v[1 : len(v)-1]
 			ret[key] = s[i]
 		} else if i < len(s) && s[i] != v { // ha van
-			return ret, not_matching
+			return ret, fmt.Errorf(not_matching)
 		}
 	}
-	return ret, ""
+	return ret, nil
 }
 
 // Does not allow longer URL than the template.
@@ -43,9 +44,9 @@ func Comp(tpl, str string) (map[string]string, string) {
 //	"/person/{name}/hobby/{hobby}", "/person/john"					=> map[name:john]
 //
 //	"/person/{name}",				"/person/john/hobby/cycling"	=> error
-func CompStrict(tpl, str string) (map[string]string, string) {
+func CompStrict(tpl, str string) (map[string]string, error) {
 	if strings.Count(tpl, "/") < strings.Count(str, "/") {
-		return nil, value_longer
+		return nil, fmt.Errorf(value_longer)
 	}
 	return Comp(tpl, str)
 }
