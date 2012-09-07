@@ -3,8 +3,8 @@
 package routep
 
 import (
-	"strings"
 	"fmt"
+	"strings"
 )
 
 const (
